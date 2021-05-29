@@ -2,13 +2,11 @@
 
 ## 使用前准备
 
-* 对 MiniVM 的代码进行改动, 使得它能输出程序的返回值: 在 ```main.cpp``` 返回之前添加
-
-  ```C++
-  if (ret) cout << endl << (*ret) % 256 << endl;
+* ```bash
+  git clone --recursive https://github.com/wangchang327/compiler-lab-test-driver.git
   ```
 
-* 确保可执行文件和测试代码在同一路径下, 并填写正确的测试样例和 MiniVM 的位置.
+* 确保可执行文件在compiler-lab-test-driver的根目录下
 
 * 如要测试 RISCV 生成, 需要提前打开一个名为 ```riscv``` 的 docker 虚拟机:
 
