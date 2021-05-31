@@ -2,10 +2,8 @@
 
 ## 使用前准备
 
-* 对 MiniVM 的代码进行改动, 使得它能输出程序的返回值: 在 ```main.cpp``` 返回之前添加
-
-  ```C++
-  if (ret) cout << endl << (*ret) % 256 << endl;
+* ```bash
+  git clone --recursive https://github.com/wangchang327/compiler-lab-test-driver.git
   ```
 
 * 确保可执行文件和测试代码在同一路径下, 并填写正确的测试样例和 MiniVM 的位置. 执行时, 会首先 ```make all``` 进行编译, 所以还需要 ```Makefile```. 如要不作任何更动而运行, 目录结构应当如图所示:
