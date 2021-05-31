@@ -5,6 +5,7 @@ import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('text', type=str, help='The phase to test')
+parser.add_argument('--verbose', action='store_true', help='Print details')
 args = parser.parse_args()
 
 
@@ -52,13 +53,13 @@ if mode != '':
     print('')
 
 print('Building compiler')
-os.system('make -j8 all')
+os.system('make -j8 compiler')
 print('')
 
-test_files = os.listdir(test_dir)
 pass_count, fail_count = 0, 0
 compile_t, run_t = [], []
 ignored = False
+test_files = os.listdir(test_dir)
 for fl in test_files:
     name, ext = fl.split('.')[0], fl.split('.')[1]
     if ext != 'sy':
@@ -103,6 +104,7 @@ for fl in test_files:
     delblankline('test.tmp.out', 'test.out')
     print('\tDone executing the compiler and minivm\n\t|')
     run_t.append(end - start)
+    print('\tTakes time: {:.4f}s'.format(end - start))
 
     try:
         myoutput = open('test.out', 'r')
@@ -121,7 +123,7 @@ for fl in test_files:
         for i in range(len(stddata)):
             mydata[i] = mydata[i].strip()
             stddata[i] = stddata[i].strip()
-            if (stddata[i] != ''):
+            if stddata[i] != '' and args.verbose:
                 print(
                     '\t|\tLine {}: My output is {}; Standard output is {}; Passed: {}'
                     .format(i + 1, mydata[i], stddata[i],
