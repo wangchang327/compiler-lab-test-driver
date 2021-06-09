@@ -3,4 +3,4 @@
 	url = https://github.com/pku-minic/open-test-cases
 [submodule "MiniVM"]
 	path = MiniVM
-	url = https://github.com/naturezzz/minivm
+	url = https://github.com/pku-minic/MiniVM

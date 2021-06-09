@@ -19,10 +19,7 @@ class bcolors:
 
 
 def delblankline(infile, outfile):
-    infopen = open(
-        infile,
-        'r',
-    )
+    infopen = open(infile, 'r')
     outfopen = open(outfile, 'w+')
 
     lines = infopen.readlines()
@@ -81,15 +78,19 @@ for fl in test_files:
     if mode != '':
         start = time.time()
         if os.path.exists(test_dir + '/' + name + '.in'):
-            os.system(minivm_dir +
-                      '/build/minivm {} output.S < {} > test.tmp.out'.format(
-                          '-t' if mode == '-t' else '', test_dir + '/' + name +
-                          '.in'))
+            ret_val = os.system(
+                minivm_dir +
+                '/build/minivm {} output.S < {} > test.tmp.out'.format(
+                    '-t' if mode == '-t' else '', test_dir + '/' + name +
+                    '.in'))
         else:
-            os.system(minivm_dir +
-                      '/build/minivm {} output.S > test.tmp.out'.format(
-                          '-t' if mode == '-t' else ''))
+            ret_val = os.system(minivm_dir +
+                                '/build/minivm {} output.S > test.tmp.out'.
+                                format('-t' if mode == '-t' else ''))
         end = time.time()
+        ret_val = ret_val >> 8
+        os.system('echo "" >> test.tmp.out')
+        os.system('echo {} >> test.tmp.out'.format(ret_val))
     else:
         os.system('docker cp riscv.sh riscv:/root/')
         os.system('docker cp output.S riscv:/root/')
